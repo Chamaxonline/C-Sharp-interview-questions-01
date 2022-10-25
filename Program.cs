@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace C_Sharp_interview_questions_01
@@ -11,6 +12,9 @@ namespace C_Sharp_interview_questions_01
             ReverseString(str);
             ReverseSentance(str);
             ReverseWords(str);
+            CountCharactors("Hello World Good Morning");
+            RemoveDuplicates("HelloWorld");
+            AllSubstring("ABCD");
         }
 
         //01. How to Reverse string
@@ -24,7 +28,7 @@ namespace C_Sharp_interview_questions_01
                 charArray[j] = str[i];
             }
             string reverseString = new string(charArray);
-            Console.WriteLine(str + " ==> " + reverseString);
+            Console.WriteLine("{0} ==> {1}", str,reverseString);
         }
 
         //02.Reverse the order of words in given string
@@ -46,7 +50,7 @@ namespace C_Sharp_interview_questions_01
                 }
 
             }
-            Console.WriteLine(str + " ==> " + reverse);
+            Console.WriteLine("{0} ==> {1}", str,reverse);
         }
 
         //03.reverse each word in a given string
@@ -74,8 +78,68 @@ namespace C_Sharp_interview_questions_01
                 }
 
             }
-            Console.WriteLine(str + " ==> " + finalString);
+            Console.WriteLine("{0} ==> {1}",str,finalString);
 
+        }
+
+        //04.count the occurrence of each character in a string
+
+        public static void CountCharactors(string str)
+        {
+            var charactorCount = new Dictionary<char, int>();
+
+            foreach (var charactor in str)
+            {
+                if (charactor != ' ')
+                {
+                    if (!charactorCount.ContainsKey(charactor))
+                    {
+                        charactorCount.Add(charactor, 1);
+                    }
+                    else
+                    {
+                        charactorCount[charactor]++;
+                    }
+                }
+            }
+
+            foreach (var charactor in charactorCount)
+            {
+                Console.WriteLine("{0} - {1}", charactor.Key, charactor.Value);
+            }
+
+        }
+
+        //05.Remove dupilcate charactors from string 
+
+        public static void RemoveDuplicates(string str)
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < str.Length -1; i++)
+            {
+                if(!result.Contains(str[i]))
+                {
+                    result += str[i];
+                }
+            }
+            Console.WriteLine("{0} ==> {1}", str, result);
+        }
+
+        //06.All possible substring of a given string
+
+        public static void AllSubstring(string str)
+        {
+            for (int i = 0; i < str.Length; i++)
+            {
+                var subString = new StringBuilder(str.Length - 1);
+
+                for (int j = i; j <str.Length -1; j++)
+                {
+                    subString.Append(str[j]);
+                    Console.WriteLine("{0}", subString);
+                }
+            }
         }
     }
 }
