@@ -9,12 +9,15 @@ namespace C_Sharp_interview_questions_01
         static void Main(string[] args)
         {
             string str = "The Quick Brown Fox";
+            int[] numArray = { 1, 6, 9, 7, 3, 4 };
             ReverseString(str);
             ReverseSentance(str);
             ReverseWords(str);
             CountCharactors("Hello World Good Morning");
             RemoveDuplicates("HelloWorld");
             AllSubstring("ABCD");
+            LargestNumber(numArray);
+            ThirdLargestNumber(numArray);
         }
 
         //01. How to Reverse string
@@ -28,7 +31,7 @@ namespace C_Sharp_interview_questions_01
                 charArray[j] = str[i];
             }
             string reverseString = new string(charArray);
-            Console.WriteLine("{0} ==> {1}", str,reverseString);
+            Console.WriteLine("{0} ==> {1}", str, reverseString);
         }
 
         //02.Reverse the order of words in given string
@@ -50,7 +53,7 @@ namespace C_Sharp_interview_questions_01
                 }
 
             }
-            Console.WriteLine("{0} ==> {1}", str,reverse);
+            Console.WriteLine("{0} ==> {1}", str, reverse);
         }
 
         //03.reverse each word in a given string
@@ -78,7 +81,7 @@ namespace C_Sharp_interview_questions_01
                 }
 
             }
-            Console.WriteLine("{0} ==> {1}",str,finalString);
+            Console.WriteLine("{0} ==> {1}", str, finalString);
 
         }
 
@@ -116,9 +119,9 @@ namespace C_Sharp_interview_questions_01
         {
             string result = string.Empty;
 
-            for (int i = 0; i < str.Length -1; i++)
+            for (int i = 0; i < str.Length - 1; i++)
             {
-                if(!result.Contains(str[i]))
+                if (!result.Contains(str[i]))
                 {
                     result += str[i];
                 }
@@ -134,12 +137,59 @@ namespace C_Sharp_interview_questions_01
             {
                 var subString = new StringBuilder(str.Length - 1);
 
-                for (int j = i; j <str.Length -1; j++)
+                for (int j = i; j < str.Length - 1; j++)
                 {
                     subString.Append(str[j]);
                     Console.WriteLine("{0}", subString);
                 }
             }
+        }
+
+        //07.Find second largest integer in an array using only one
+
+        public static void LargestNumber(int[] numArray)
+        {
+            int tempMax = int.MinValue;
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                if (tempMax < numArray[i])
+                {
+                    tempMax = numArray[i];
+                }
+            }
+            Console.WriteLine("{0} , {1}", "Maximum number is ", tempMax);
+        }
+
+        //08. Find third largest integer in an array using only one loop?
+
+        public static void ThirdLargestNumber(int[] numArray)
+        {
+            int max1 = int.MinValue;
+            int max2 = int.MinValue;
+            int max3 = int.MinValue;
+
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                if (max1 < numArray[i])
+                {
+                    max1 = numArray[i];
+                }
+
+                if (max1 > max2)
+                {
+                    int temp = max2;
+                    max2 = max1;
+                    max1 = temp;
+                }
+
+                if (max2 > max3)
+                {
+                    int temp = max3;
+                    max3 = max2;
+                    max2 = temp;
+                }
+            }
+            Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", "Third Largest Number is ", max3, "Second Largest Number is ", max2, "Largest Number is ", max1);
         }
     }
 }
